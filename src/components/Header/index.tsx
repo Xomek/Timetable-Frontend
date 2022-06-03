@@ -10,6 +10,7 @@ import {
 import { IButton } from "../../interfaces/button.interface";
 import { ILink } from "../../interfaces/link.interface";
 import { contextModal, IContextModal } from "../../App";
+import { LoginForm, RegistrationForm } from "../../components";
 
 const Header: FC = () => {
   const auth: boolean = false;
@@ -31,12 +32,12 @@ const Header: FC = () => {
   ];
 
   function showModalWithLoginForm() {
-    setContentModal(<div>LoginForm</div>);
+    setContentModal(<LoginForm />);
     setVisibleModal(true);
   }
 
   function showModalWithRegistrationForm() {
-    setContentModal(<div>RegistrationForm</div>);
+    setContentModal(<RegistrationForm />);
     setVisibleModal(true);
   }
 
