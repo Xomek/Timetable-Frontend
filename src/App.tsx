@@ -1,4 +1,5 @@
-import { Modal } from "@mui/material";
+import { Close } from "@mui/icons-material";
+import { Box, Modal } from "@mui/material";
 import {
   createContext,
   Dispatch,
@@ -22,8 +23,27 @@ const App: FC = () => {
 
   return (
     <>
-      <Modal open={isVisibleModal} onClose={() => setVisibleModal(false)}>
-        {contentModal}
+      <Modal
+        open={isVisibleModal}
+        onClose={() => setVisibleModal(false)}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box sx={{ position: "relative" }}>
+          <Close
+            onClick={() => setVisibleModal(false)}
+            sx={{
+              cursor: "pointer",
+              position: "absolute",
+              right: "10px",
+              top: "10px",
+            }}
+          />
+          {contentModal}
+        </Box>
       </Modal>
       <contextModal.Provider
         value={{
