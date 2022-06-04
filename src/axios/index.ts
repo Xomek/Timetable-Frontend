@@ -9,6 +9,7 @@ $api.interceptors.request.use((config) => {
   (config.headers ??= {}).Authorization = `Bearer ${localStorage.getItem(
     "token"
   )}`;
+  (config.headers ??= {})["x-user-id"] = `${localStorage.getItem("userId")}`;
   return config;
 });
 
