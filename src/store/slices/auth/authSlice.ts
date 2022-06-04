@@ -38,7 +38,7 @@ const authSlice = createSlice({
       action: PayloadAction<IAuthResponse>
     ) => {
       state.auth = true;
-      state.user.id = action.payload.token;
+      state.user.id = action.payload.userId;
       state.loading = false;
     },
     [loginUser.pending.type]: (state) => {
