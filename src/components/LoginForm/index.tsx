@@ -2,12 +2,18 @@ import { Button, Box, Typography, TextField } from "@mui/material";
 import { FC } from "react";
 import { Formik } from "formik";
 import { loginFormSchema } from "../../yup/loginForm.shema";
+import { useAppDispatch } from "../../store/hooks";
+import { loginUser } from "../../store/thunks/auth/authThunks";
 
 const LoginForm: FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <Formik
       initialValues={{ login: "", password: "" }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => {
+        dispatch(loginUser(values));
+      }}
       validationSchema={loginFormSchema}
     >
       {({ values, handleChange, handleSubmit, errors }) => (

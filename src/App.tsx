@@ -7,8 +7,12 @@ import {
   SetStateAction,
   useState,
   ReactElement,
+  useEffect,
 } from "react";
 import { Header } from "./components";
+import { useAuth } from "./hooks/useAuth";
+import { useAppDispatch } from "./store/hooks";
+import { refreshUserToken } from "./store/thunks/auth/authThunks";
 
 export interface IContextModal {
   setVisibleModal: Dispatch<SetStateAction<boolean>>;
@@ -18,8 +22,20 @@ export interface IContextModal {
 export const contextModal = createContext<IContextModal>({} as IContextModal);
 
 const App: FC = () => {
+  const auth = useAuth();
   const [isVisibleModal, setVisibleModal] = useState<boolean>(false);
   const [contentModal, setContentModal] = useState<ReactElement>(<div />);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      dispatch(refreshUserToken());
+    }
+  }, []);
+
+  useEffect(() => {
+    setVisibleModal(false);
+  }, [auth]);
 
   return (
     <>
