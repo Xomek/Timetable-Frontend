@@ -44,29 +44,77 @@ const Header: FC = () => {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#1e202a" }}>
       <Container maxWidth="lg">
-        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+        <Toolbar
+          disableGutters
+          sx={{ justifyContent: "space-between", padding: "20px 0" }}
+        >
           <Typography
             variant="h6"
             component="a"
             href="/"
             sx={{
+              textShadow: "3px 3px 6px #5dddFF",
+              boxShadow: "2px 2px 8px #000",
+              padding: "0px 16px",
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              fontStyle: "italic",
+              fontSize: "28px",
               color: "inherit",
+              display: "flex",
+              alignItems: "center",
             }}
           >
-            TT
+            <Typography
+              sx={{
+                fontSize: "inherit",
+                fontStyle: "italic",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "#00ffff",
+              }}
+            >
+              T
+            </Typography>
+            ime
+            <Typography
+              sx={{
+                fontSize: "inherit",
+                fontStyle: "italic",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "#00ffff",
+              }}
+            >
+              T
+            </Typography>
+            able
           </Typography>
           {auth ? (
             <Box>
               {userLinks.map((link) => (
-                <Button key={link.text} sx={{ color: "white" }}>
+                <Button
+                  key={link.text}
+                  sx={{
+                    color: "white",
+                    boxShadow: "2px 2px 8px #000",
+                    padding: "5px 20px",
+                    ml: "10px",
+                  }}
+                >
                   {link.text}
                 </Button>
               ))}
               {userButtons.map((button) => (
-                <Button key={button.text} sx={{ color: "white" }}>
+                <Button
+                  key={button.text}
+                  sx={{
+                    color: "white",
+                    boxShadow: "2px 2px 8px #000",
+                    padding: "5px 20px",
+                    ml: "10px",
+                  }}
+                >
                   {button.text}
                 </Button>
               ))}
@@ -76,7 +124,12 @@ const Header: FC = () => {
               {guestButtons.map((button) => (
                 <Button
                   key={button.text}
-                  sx={{ color: "white" }}
+                  sx={{
+                    color: "white",
+                    boxShadow: "2px 2px 8px #000",
+                    padding: "5px 20px",
+                    ml: "10px",
+                  }}
                   onClick={button.onClick}
                 >
                   {button.text}
