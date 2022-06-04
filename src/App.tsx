@@ -32,7 +32,7 @@ const App: FC = () => {
           alignItems: "center",
         }}
       >
-        <Box sx={{ position: "relative" }}>
+        <Box sx={{ position: "relative", outline: "none" }}>
           <Close
             onClick={() => setVisibleModal(false)}
             sx={{
