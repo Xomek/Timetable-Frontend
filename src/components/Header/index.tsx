@@ -7,13 +7,17 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { IButton } from "../../interfaces/button.interface";
-import { ILink } from "../../interfaces/link.interface";
+import { IButton } from "../../interfaces/button.interface.interface";
+import { ILink } from "../../interfaces/link.interface.interface";
 import { contextModal, IContextModal } from "../../App";
 import { LoginForm, RegistrationForm } from "../../components";
+import { useAuth } from "../../hooks/useAuth";
+import { logout } from "../../store/thunks/auth/authThunks";
+import { useAppDispatch } from "../../store/hooks";
 
 const Header: FC = () => {
-  const auth: boolean = false;
+  const auth = useAuth();
+  const dispatch = useAppDispatch();
   const { setVisibleModal, setContentModal } =
     useContext<IContextModal>(contextModal);
 
@@ -22,7 +26,9 @@ const Header: FC = () => {
     { text: "Настройки", to: "/settings" },
   ];
 
-  const userButtons: IButton[] = [{ text: "Выйти", onClick: () => {} }];
+  const userButtons: IButton[] = [
+    { text: "Выйти", onClick: () => dispatch(logout()) },
+  ];
   const guestButtons: IButton[] = [
     { text: "Регистрация", onClick: showModalWithRegistrationForm },
     {
@@ -114,6 +120,7 @@ const Header: FC = () => {
                     padding: "5px 20px",
                     ml: "10px",
                   }}
+                  onClick={button.onClick}
                 >
                   {button.text}
                 </Button>

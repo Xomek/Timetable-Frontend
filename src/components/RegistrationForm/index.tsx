@@ -1,9 +1,13 @@
-import { Button, Box, Typography, TextField } from "@mui/material";
+import { Button, Box, Typography, TextField, MenuItem } from "@mui/material";
 import { Formik } from "formik";
 import { FC } from "react";
+import { useAppDispatch } from "../../store/hooks";
+import { registrationUser } from "../../store/thunks/auth/authThunks";
 import { registrationFormSchema } from "../../yup/registrationForm.shema";
 
 const RegistrationForm: FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <Formik
       initialValues={{
@@ -12,7 +16,7 @@ const RegistrationForm: FC = () => {
         confirmPassword: "",
         group: "",
       }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => dispatch(registrationUser(values))}
       validationSchema={registrationFormSchema}
     >
       {({ values, handleSubmit, handleChange, errors }) => (
@@ -74,7 +78,11 @@ const RegistrationForm: FC = () => {
             label="Выберите группу"
             value={values.group}
             onChange={handleChange}
-          />
+          >
+            <MenuItem>1</MenuItem>
+            <MenuItem>2</MenuItem>
+            <MenuItem>3</MenuItem>
+          </TextField>
           <Button
             type="submit"
             sx={{
