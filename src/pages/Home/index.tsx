@@ -6,7 +6,7 @@ const Home: FC = () => {
   return (
     <Container
       sx={{
-        minHeight: "calc(100vh - (84.8px + 64px))",
+        height: "calc(100% - 147px)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
