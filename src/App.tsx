@@ -10,6 +10,7 @@ import {
   useEffect,
 } from "react";
 import { Header } from "./components";
+import Footer from "./components/Footer";
 import { useAuth } from "./hooks/useAuth";
 import { Home } from "./pages";
 import { useAppDispatch } from "./store/hooks";
@@ -71,6 +72,7 @@ const App: FC = () => {
         <Header />
       </contextModal.Provider>
       <Home />
+      <Footer />
     </>
   );
 };
