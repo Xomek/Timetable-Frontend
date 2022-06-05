@@ -29,6 +29,7 @@ export const registrationUser = createAsyncThunk(
         login: userCredentials.login,
         password: userCredentials.password,
         confirmPassword: userCredentials.confirmPassword,
+        groupId: userCredentials.groupId,
       });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.userId);

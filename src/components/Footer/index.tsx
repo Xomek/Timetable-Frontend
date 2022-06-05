@@ -1,5 +1,5 @@
 import { Paid } from "@mui/icons-material";
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { Box, Toolbar, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { FC } from "react";
 
@@ -12,7 +12,11 @@ const Footer: FC = () => {
     >
       <Container maxWidth="lg">
         <Toolbar
-          sx={{ display: "flex", justifyContent: "center", height: "60px" }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            height: "60px",
+          }}
         >
           <Box sx={{ cursor: "pointer", display: "flex" }}>
             <Paid

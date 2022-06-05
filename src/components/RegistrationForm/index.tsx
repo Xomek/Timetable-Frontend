@@ -1,12 +1,20 @@
 import { Button, Box, Typography, TextField, MenuItem } from "@mui/material";
 import { Formik } from "formik";
-import { FC } from "react";
-import { useAppDispatch } from "../../store/hooks";
+import { FC, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { registrationUser } from "../../store/thunks/authThunks";
 import { registrationFormSchema } from "../../yup/registrationForm.shema";
 
 const RegistrationForm: FC = () => {
   const dispatch = useAppDispatch();
+  const [selectValue, setSelectValue] = useState<string>("");
+  const { groupList } = useAppSelector((state) => state.groups);
+
+  function handleSelect(
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) {
+    setSelectValue(e.target.value);
+  }
 
   return (
     <Formik
@@ -14,7 +22,7 @@ const RegistrationForm: FC = () => {
         login: "",
         password: "",
         confirmPassword: "",
-        group: "",
+        groupId: "",
       }}
       onSubmit={(values) => dispatch(registrationUser(values))}
       validationSchema={registrationFormSchema}
@@ -74,14 +82,21 @@ const RegistrationForm: FC = () => {
           />
           <TextField
             select
-            name="select"
+            name="groupId"
             label="Выберите группу"
-            value={values.group}
-            onChange={handleChange}
+            value={selectValue}
+            onChange={(e) => {
+              handleChange(e);
+              handleSelect(e);
+            }}
+            helperText={errors.groupId}
+            error={!!errors.groupId}
           >
-            <MenuItem>1</MenuItem>
-            <MenuItem>2</MenuItem>
-            <MenuItem>3</MenuItem>
+            {groupList.map((group) => (
+              <MenuItem key={group.id} value={group.id}>
+                {group.title}
+              </MenuItem>
+            ))}
           </TextField>
           <Button
             type="submit"
