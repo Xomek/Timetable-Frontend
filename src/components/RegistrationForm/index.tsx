@@ -2,7 +2,7 @@ import { Button, Box, Typography, TextField, MenuItem } from "@mui/material";
 import { Formik } from "formik";
 import { FC } from "react";
 import { useAppDispatch } from "../../store/hooks";
-import { registrationUser } from "../../store/thunks/auth/authThunks";
+import { registrationUser } from "../../store/thunks/authThunks";
 import { registrationFormSchema } from "../../yup/registrationForm.shema";
 
 const RegistrationForm: FC = () => {
