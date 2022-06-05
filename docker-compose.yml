@@ -1,6 +1,6 @@
 version: "3.4"
 services:
-  react-nginx-app:
+  ttapp-frontend:
     stdin_open: true
     image: ttapp-frontend:latest
     expose:
