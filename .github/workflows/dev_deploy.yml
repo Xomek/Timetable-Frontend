@@ -22,6 +22,5 @@ jobs:
           cd /root/kswbtw/Timetable-Frontend
           git checkout dev
           git pull
-          docker build -f Dockerfile -t ttapp-backend:latest .
-          docker compose up -d --force-recreate ttapp-frontend
+          docker build -f Dockerfile -t ttapp-frontend:latest .
           docker compose up -d --force-recreate ttapp-frontend
