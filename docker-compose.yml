@@ -3,6 +3,8 @@ services:
   ttapp-frontend:
     stdin_open: true
     image: ttapp-frontend:latest
+    environment:
+      - REACT_APP_BASE_URL=${REACT_APP_BASE_URL}
     expose:
       - 8080
     ports:

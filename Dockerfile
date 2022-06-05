@@ -8,7 +8,6 @@ WORKDIR /usr/app
 RUN npm ci
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
-ENV REACT_APP_BASE_URL http://localhost:3052
 
 RUN npm run build
 
