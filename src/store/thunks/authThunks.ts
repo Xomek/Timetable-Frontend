@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import $api, { API_URL } from "../../../axios";
-import { IAuthResponse } from "../../../interfaces/authResponse.interface";
-import { IUserCredentials } from "../../../interfaces/userCredentials.interface";
+import $api, { API_URL } from "../../axios";
+import { IAuthResponse } from "../../interfaces/authResponse.interface";
+import { IUserCredentials } from "../../interfaces/userCredentials.interface";
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",

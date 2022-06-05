@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IAuthResponse } from "../../../interfaces/authResponse.interface";
-import { IUser } from "../../../interfaces/user.interface";
+import { IAuthResponse } from "../../interfaces/authResponse.interface";
+import { IUser } from "../../interfaces/user.interface";
 import {
   loginUser,
   logout,
   refreshUserToken,
   registrationUser,
-} from "../../thunks/auth/authThunks";
+} from "../thunks/authThunks";
 
 interface AuthState {
   user: IUser;
