@@ -27,4 +27,5 @@ export const registrationFormSchema = yup.object({
     .string()
     .required("Обязательное поле")
     .oneOf([yup.ref("password")], "Пароли не совпадают"),
+  groupId: yup.string().required("Обязательное поле"),
 });
