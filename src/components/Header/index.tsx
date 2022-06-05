@@ -12,7 +12,7 @@ import { ILink } from "../../interfaces/link.interface.interface";
 import { contextModal, IContextModal } from "../../App";
 import { LoginForm, RegistrationForm } from "../../components";
 import { useAuth } from "../../hooks/useAuth";
-import { logout } from "../../store/thunks/auth/authThunks";
+import { logout } from "../../store/thunks/authThunks";
 import { useAppDispatch } from "../../store/hooks";
 
 const Header: FC = () => {

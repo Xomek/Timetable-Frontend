@@ -11,8 +11,9 @@ import {
 } from "react";
 import { Header } from "./components";
 import { useAuth } from "./hooks/useAuth";
+import { Home } from "./pages";
 import { useAppDispatch } from "./store/hooks";
-import { refreshUserToken } from "./store/thunks/auth/authThunks";
+import { refreshUserToken } from "./store/thunks/authThunks";
 
 export interface IContextModal {
   setVisibleModal: Dispatch<SetStateAction<boolean>>;
@@ -69,6 +70,7 @@ const App: FC = () => {
       >
         <Header />
       </contextModal.Provider>
+      <Home />
     </>
   );
 };
