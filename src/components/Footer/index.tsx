@@ -5,8 +5,12 @@ import { FC } from "react";
 
 const Footer: FC = () => {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#1e202a" }}>
-      <Container>
+    <Box
+      component="footer"
+      position="static"
+      sx={{ backgroundColor: "#1e202a", color: "#fff" }}
+    >
+      <Container maxWidth="lg">
         <Toolbar
           sx={{ display: "flex", justifyContent: "center", height: "60px" }}
         >
@@ -20,7 +24,7 @@ const Footer: FC = () => {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </Box>
   );
 };
 

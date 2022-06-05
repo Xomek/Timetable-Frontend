@@ -52,7 +52,11 @@ const Header: FC = () => {
       <Container maxWidth="lg">
         <Toolbar
           disableGutters
-          sx={{ justifyContent: "space-between", padding: "20px 0" }}
+          sx={{
+            justifyContent: "space-between",
+            padding: "20px 0",
+            height: "87px",
+          }}
         >
           <Typography
             variant="h6"
