@@ -32,7 +32,7 @@ const Group: FC = () => {
       {auth ? (
         <Weeks weeks={[]} />
       ) : selectedGroup ? (
-        selectedGroup.headmanId
+        <Weeks weeks={selectedGroup.weeks} />
       ) : (
         <TextField
           select
