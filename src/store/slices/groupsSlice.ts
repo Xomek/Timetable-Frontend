@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IGroup } from "../../interfaces/group.interface";
 import { getGroup, getGroupList } from "../thunks/groupsThunks";
+import MOCK_GROUP from "../../mock/group.mock";
 
 interface GroupsState {
   selectedGroup: IGroup | null;
@@ -10,7 +11,7 @@ interface GroupsState {
 }
 
 const initialState: GroupsState = {
-  selectedGroup: null,
+  selectedGroup: MOCK_GROUP,
   groupList: [],
   loading: false,
   error: "",
