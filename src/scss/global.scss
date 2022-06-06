@@ -33,11 +33,16 @@ body {
 }
 
 .slick-arrow {
-  top: -50px;
+  top: -20px;
 }
 .slick-prev {
-  left: 50px;
+  left: 0px;
 }
 .slick-next {
-  right: 50px;
+  right: 0px;
+}
+
+.week-dots {
+  position: relative;
+  bottom: 50px;
 }
