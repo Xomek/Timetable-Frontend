@@ -4,8 +4,10 @@ import {
   Box,
   Button,
   Container,
+  styled,
   Toolbar,
   Typography,
+  Theme,
 } from "@mui/material";
 import { IButton } from "../../interfaces/button.interface.interface";
 import { ILink } from "../../interfaces/link.interface.interface";
@@ -14,6 +16,21 @@ import { LoginForm, RegistrationForm } from "../../components";
 import { useAuth } from "../../hooks/useAuth";
 import { logout } from "../../store/thunks/authThunks";
 import { useAppDispatch } from "../../store/hooks";
+
+const HeaderStyled = styled(AppBar)({
+  position: "static",
+  backgroundColor: "#1e202a",
+});
+
+const ToolbarStyled = styled(Toolbar)(({ theme }: { theme: Theme }) => ({
+  justifyContent: "space-between",
+  padding: "20px 0",
+  height: "87px",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    height: "140px",
+  },
+}));
 
 const Header: FC = () => {
   const auth = useAuth();
@@ -48,16 +65,9 @@ const Header: FC = () => {
   }
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#1e202a" }}>
+    <HeaderStyled>
       <Container maxWidth="lg">
-        <Toolbar
-          disableGutters
-          sx={{
-            justifyContent: "space-between",
-            padding: "20px 0",
-            height: "87px",
-          }}
-        >
+        <ToolbarStyled disableGutters>
           <Typography
             variant="h6"
             component="a"
@@ -148,9 +158,9 @@ const Header: FC = () => {
               ))}
             </Box>
           )}
-        </Toolbar>
+        </ToolbarStyled>
       </Container>
-    </AppBar>
+    </HeaderStyled>
   );
 };
 
