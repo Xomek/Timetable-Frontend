@@ -17,6 +17,7 @@ interface IWeekProps {
 const Week: FC<IWeekProps> = ({ week }) => {
   const settings: Settings = {
     speed: 500,
+    arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: true,
@@ -49,7 +50,7 @@ const Week: FC<IWeekProps> = ({ week }) => {
           <Card
             key={day.id}
             sx={{
-              height: "500px",
+              maxHeight: "500px",
               color: "#fff",
               backgroundColor: "#e4e6e7",
               overflowY: "auto",
