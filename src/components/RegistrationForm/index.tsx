@@ -32,14 +32,16 @@ const RegistrationForm: FC = () => {
           component="form"
           onSubmit={handleSubmit}
           sx={{
+            minHeight: 700,
+            maxWidth: 500,
+            width: "100%",
+            margin: "0 auto",
             "& .MuiTextField-root": { m: 1.5 },
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             backgroundColor: "#fff",
             padding: "60px 30px",
-            width: "500px",
-            height: "700px",
             borderRadius: "8px",
           }}
         >
