@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@emotion/react";
 import { Close } from "@mui/icons-material";
 import { Box, Modal } from "@mui/material";
 import {
@@ -13,6 +14,7 @@ import { Header } from "./components";
 import Footer from "./components/Footer";
 import { useAuth } from "./hooks/useAuth";
 import { Home } from "./pages";
+import { theme } from "./scss/theme";
 import { useAppDispatch } from "./store/hooks";
 import { refreshUserToken } from "./store/thunks/authThunks";
 
@@ -40,7 +42,7 @@ const App: FC = () => {
   }, [auth]);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Modal
         open={isVisibleModal}
         onClose={() => setVisibleModal(false)}
@@ -73,7 +75,7 @@ const App: FC = () => {
       </contextModal.Provider>
       <Home />
       <Footer />
-    </>
+    </ThemeProvider>
   );
 };
 
