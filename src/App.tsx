@@ -1,5 +1,6 @@
+import { ThemeProvider } from "@emotion/react";
 import { Close } from "@mui/icons-material";
-import { Box, Modal } from "@mui/material";
+import { Box, Modal, styled } from "@mui/material";
 import {
   createContext,
   Dispatch,
@@ -13,6 +14,7 @@ import { Header } from "./components";
 import Footer from "./components/Footer";
 import { useAuth } from "./hooks/useAuth";
 import { Home } from "./pages";
+import { theme } from "./scss/theme";
 import { useAppDispatch } from "./store/hooks";
 import { refreshUserToken } from "./store/thunks/authThunks";
 
@@ -22,6 +24,12 @@ export interface IContextModal {
 }
 
 export const contextModal = createContext<IContextModal>({} as IContextModal);
+
+const ModalStyled = styled(Modal)({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
 
 const App: FC = () => {
   const auth = useAuth();
@@ -40,17 +48,16 @@ const App: FC = () => {
   }, [auth]);
 
   return (
-    <>
-      <Modal
-        open={isVisibleModal}
-        onClose={() => setVisibleModal(false)}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Box sx={{ position: "relative", outline: "none" }}>
+    <ThemeProvider theme={theme}>
+      <ModalStyled open={isVisibleModal} onClose={() => setVisibleModal(false)}>
+        <Box
+          sx={{
+            maxWidth: 500,
+            position: "absolute",
+            outline: "none",
+            width: "100%",
+          }}
+        >
           <Close
             onClick={() => setVisibleModal(false)}
             sx={{
@@ -62,7 +69,7 @@ const App: FC = () => {
           />
           {contentModal}
         </Box>
-      </Modal>
+      </ModalStyled>
       <contextModal.Provider
         value={{
           setVisibleModal,
@@ -73,7 +80,7 @@ const App: FC = () => {
       </contextModal.Provider>
       <Home />
       <Footer />
-    </>
+    </ThemeProvider>
   );
 };
 

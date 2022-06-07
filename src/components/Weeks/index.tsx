@@ -28,7 +28,13 @@ const Weeks: FC<IWeeksProps> = ({ weeks }) => {
   const sliderRef = useRef<any>(null);
 
   function appendDots(dots: ReactNode[]) {
-    return <ul className="week-dots">{dots.map((dot) => dot)}</ul>;
+    return (
+      <ul className="week-dots">
+        {dots.map((dot, index) => (
+          <div key={index}>{dot}</div>
+        ))}
+      </ul>
+    );
   }
 
   return (
