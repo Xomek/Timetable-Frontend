@@ -22,6 +22,24 @@ const Week: FC<IWeekProps> = ({ week }) => {
     centerMode: true,
     variableWidth: true,
     focusOnSelect: true,
+    responsive: [
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 2,
+          centerMode: false,
+          variableWidth: false,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 1,
+          centerMode: false,
+          variableWidth: false,
+        },
+      },
+    ],
   };
 
   return (

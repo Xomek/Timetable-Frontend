@@ -7,9 +7,6 @@ const Home: FC = () => {
     <Container
       sx={{
         height: "calc(100% - 151px)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
       <Group />
