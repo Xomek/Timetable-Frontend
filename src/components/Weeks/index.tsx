@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Settings } from "react-slick";
-import { Container } from "@mui/system";
 import { Box, Button } from "@mui/material";
 
 interface IWeeksProps {

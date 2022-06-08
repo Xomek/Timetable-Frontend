@@ -21,6 +21,10 @@ const Group: FC = () => {
     }
   }, [selectedGroup]);
 
+  useEffect(() => {
+    dispatch(getGroup(localStorage.getItem("groupId") || "123"));
+  }, [auth]);
+
   function selectHandler(
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) {
@@ -30,23 +34,39 @@ const Group: FC = () => {
   return (
     <div>
       {auth ? (
-        <Weeks weeks={[]} />
-      ) : selectedGroup ? (
-        <Weeks weeks={selectedGroup.weeks} />
+        <>
+          <TextField
+            select
+            label="Выберите группу"
+            sx={{ width: 300 }}
+            value={selectValue}
+            onChange={(e) => selectHandler(e)}
+          >
+            {groupList.map((group) => (
+              <MenuItem key={group.id} value={group.id}>
+                {group.title}
+              </MenuItem>
+            ))}
+          </TextField>
+          {selectedGroup && <Weeks weeks={selectedGroup.weeks} />}
+        </>
       ) : (
-        <TextField
-          select
-          label="Выберите группу"
-          sx={{ width: "300px" }}
-          value={selectValue}
-          onChange={(e) => selectHandler(e)}
-        >
-          {groupList.map((group) => (
-            <MenuItem key={group.id} value={group.id}>
-              {group.title}
-            </MenuItem>
-          ))}
-        </TextField>
+        <>
+          <TextField
+            select
+            label="Выберите группу"
+            sx={{ width: 300 }}
+            value={selectValue}
+            onChange={(e) => selectHandler(e)}
+          >
+            {groupList.map((group) => (
+              <MenuItem key={group.id} value={group.id}>
+                {group.title}
+              </MenuItem>
+            ))}
+          </TextField>
+          {selectedGroup && <Weeks weeks={selectedGroup.weeks} />}
+        </>
       )}
     </div>
   );
