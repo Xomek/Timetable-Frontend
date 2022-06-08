@@ -14,6 +14,7 @@ export const loginUser = createAsyncThunk(
       });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.userId);
+      localStorage.setItem("groupId", response.data.groupId);
       return response.data;
     } catch ({ message }) {
       return rejectWithValue(message);
@@ -33,6 +34,7 @@ export const registrationUser = createAsyncThunk(
       });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.userId);
+      localStorage.setItem("groupId", response.data.groupId);
       return response.data;
     } catch ({ message }) {
       return rejectWithValue(message);
@@ -45,6 +47,9 @@ export const logout = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await $api.get<IAuthResponse>("/auth/logout");
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("groupId");
     } catch ({ message }) {
       return rejectWithValue(message);
     }
