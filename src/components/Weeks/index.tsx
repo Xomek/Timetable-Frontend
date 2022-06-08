@@ -18,6 +18,7 @@ const Weeks: FC<IWeeksProps> = ({ weeks }) => {
     infinite: false,
     arrows: false,
     speed: 100,
+    accessibility: false,
     slidesToShow: 1,
     slidesToScroll: 1,
     swipe: false,
