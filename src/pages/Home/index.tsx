@@ -6,7 +6,7 @@ const Home: FC = () => {
   return (
     <Container
       sx={{
-        height: "calc(100% - 151px)",
+        height: "calc(100vh - 220px)",
       }}
     >
       <Group />

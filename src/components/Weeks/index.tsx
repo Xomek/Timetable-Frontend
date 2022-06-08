@@ -38,7 +38,7 @@ const Weeks: FC<IWeeksProps> = ({ weeks }) => {
   }
 
   return (
-    <Container>
+    <div>
       <Slider ref={sliderRef} {...settings}>
         {weeks.map((week) => (
           <Week key={week.id} week={week} />
@@ -75,7 +75,7 @@ const Weeks: FC<IWeeksProps> = ({ weeks }) => {
           </Button>,
         ])}
       </Box>
-    </Container>
+    </div>
   );
 };
 

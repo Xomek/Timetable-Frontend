@@ -4,11 +4,23 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
+import { styled, Typography, Theme } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Settings } from "react-slick";
+
+const CardStyled = styled(Card)(({ theme }: { theme: Theme }) => ({
+  maxHeight: 460,
+  height: "100%",
+  color: "#fff",
+  backgroundColor: "#e4e6e7",
+  overflowY: "auto",
+  "::-webkit-scrollbar": { display: "none" },
+  [theme.breakpoints.down("sm")]: {
+    maxHeight: 360,
+  },
+}));
 
 interface IWeekProps {
   week: IWeek;
@@ -47,16 +59,7 @@ const Week: FC<IWeekProps> = ({ week }) => {
     <>
       <Slider {...settings}>
         {week.days.map((day) => (
-          <Card
-            key={day.id}
-            sx={{
-              maxHeight: "500px",
-              color: "#fff",
-              backgroundColor: "#e4e6e7",
-              overflowY: "auto",
-              "::-webkit-scrollbar": { display: "none" },
-            }}
-          >
+          <CardStyled key={day.id}>
             <CardHeader
               sx={{ textAlign: "center", color: "#2d333b" }}
               title={day.title}
@@ -116,7 +119,7 @@ const Week: FC<IWeekProps> = ({ week }) => {
                 </Box>
               ))}
             </CardContent>
-          </Card>
+          </CardStyled>
         ))}
       </Slider>
     </>
