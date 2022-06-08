@@ -1,4 +1,4 @@
-import { Typography, Box, Tabs, Tab } from "@mui/material";
+import { Typography, Box, Tabs, Tab, TextField } from "@mui/material";
 import { FC, SyntheticEvent, useState } from "react";
 
 interface TabPanelProps {
@@ -19,7 +19,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ pl: 3 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -59,43 +59,35 @@ const Settings: FC = () => {
       >
         Настройки
       </Typography>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: "divider" }}
-      >
-        <Tab label="Item One" {...a11yProps(0)} />
-        <Tab label="Item Two" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
-        <Tab label="Item Seven" {...a11yProps(6)} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
+      <Box sx={{ display: "flex" }}>
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={{ borderRight: 1, borderColor: "divider", width: 300 }}
+        >
+          <Tab label="Item One" {...a11yProps(0)} />
+          <Tab label="Item Two" {...a11yProps(1)} />
+          <Tab label="Item Three" {...a11yProps(2)} />
+        </Tabs>
+        <TabPanel value={value} index={0}>
+          <TextField sx={{ mb: 2 }} placeholder="Логин" />
+          <TextField sx={{ mb: 2 }} placeholder="Пароль" />
+          <TextField placeholder="Роль" />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <TextField sx={{ mb: 2 }} placeholder="Тест" />
+          <TextField sx={{ mb: 2 }} placeholder="Тест" />
+          <TextField placeholder="Тест" />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <TextField sx={{ mb: 2 }} placeholder="123" />
+          <TextField sx={{ mb: 2 }} placeholder="Тест" />
+          <TextField placeholder="12" />
+        </TabPanel>
+      </Box>
     </Box>
   );
 };
