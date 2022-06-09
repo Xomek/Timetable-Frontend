@@ -1,9 +1,33 @@
-import { Button, Box, Typography, TextField } from "@mui/material";
+import {
+  Button,
+  Box,
+  Typography,
+  TextField,
+  Theme,
+  styled,
+} from "@mui/material";
 import { FC } from "react";
 import { Formik } from "formik";
 import { loginFormSchema } from "../../yup/loginForm.shema";
 import { useAppDispatch } from "../../store/hooks";
 import { loginUser } from "../../store/thunks/authThunks";
+
+const LoginFormStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
+  minHeight: 500,
+  maxWidth: 500,
+  width: "100%",
+  margin: "0 auto",
+  "& .MuiTextField-root": { m: 1.5 },
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  backgroundColor: "#fff",
+  padding: "60px 30px",
+  borderRadius: "8px",
+  [theme.breakpoints.down("sm")]: {
+    height: "100vh",
+  },
+}));
 
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -17,28 +41,12 @@ const LoginForm: FC = () => {
       validationSchema={loginFormSchema}
     >
       {({ values, handleChange, handleSubmit, errors }) => (
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{
-            minHeight: 500,
-            maxWidth: 500,
-            width: "100%",
-            margin: "0 auto",
-            "& .MuiTextField-root": { m: 1.5 },
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            backgroundColor: "#fff",
-            padding: "60px 30px",
-            borderRadius: "8px",
-          }}
-        >
+        <LoginFormStyled component="form" onSubmit={() => handleSubmit()}>
           <Typography
             sx={{
               fontSize: "30px",
               textAlign: "center",
-              mb: "20px",
+              mb: "30px",
               color: "#1e202a",
             }}
           >
@@ -50,6 +58,7 @@ const LoginForm: FC = () => {
             name="login"
             label="Логин"
             value={values.login}
+            sx={{ mb: 3 }}
             onChange={handleChange}
             helperText={errors.login}
             error={!!errors.login}
@@ -59,6 +68,7 @@ const LoginForm: FC = () => {
             name="password"
             label="Пароль"
             value={values.password}
+            sx={{ mb: 1 }}
             onChange={handleChange}
             helperText={errors.password}
             error={!!errors.password}
@@ -80,7 +90,7 @@ const LoginForm: FC = () => {
           >
             Войти
           </Button>
-        </Box>
+        </LoginFormStyled>
       )}
     </Formik>
   );

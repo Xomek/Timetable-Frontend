@@ -1,9 +1,31 @@
-import { Button, Box, Typography, TextField, MenuItem } from "@mui/material";
+import {
+  Button,
+  Box,
+  Typography,
+  TextField,
+  MenuItem,
+  Theme,
+  styled,
+} from "@mui/material";
 import { Formik } from "formik";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { registrationUser } from "../../store/thunks/authThunks";
 import { registrationFormSchema } from "../../yup/registrationForm.shema";
+
+const RegistrationFormStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
+  minHeight: 700,
+  height: "100vh",
+  maxWidth: 500,
+  width: "100%",
+  margin: "0 auto",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  backgroundColor: "#fff",
+  padding: "60px 30px",
+  borderRadius: "8px",
+}));
 
 const RegistrationForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -28,22 +50,9 @@ const RegistrationForm: FC = () => {
       validationSchema={registrationFormSchema}
     >
       {({ values, handleSubmit, handleChange, errors }) => (
-        <Box
+        <RegistrationFormStyled
           component="form"
-          onSubmit={handleSubmit}
-          sx={{
-            minHeight: 700,
-            maxWidth: 500,
-            width: "100%",
-            margin: "0 auto",
-            "& .MuiTextField-root": { m: 1.5 },
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            backgroundColor: "#fff",
-            padding: "60px 30px",
-            borderRadius: "8px",
-          }}
+          onSubmit={() => handleSubmit()}
         >
           <Typography
             sx={{
@@ -60,6 +69,7 @@ const RegistrationForm: FC = () => {
             label="Логин"
             name="login"
             value={values.login}
+            sx={{ mb: 3 }}
             onChange={handleChange}
             helperText={errors.login}
             error={!!errors.login}
@@ -69,6 +79,7 @@ const RegistrationForm: FC = () => {
             label="Пароль"
             name="password"
             value={values.password}
+            sx={{ mb: 3 }}
             onChange={handleChange}
             helperText={errors.password}
             error={!!errors.password}
@@ -78,6 +89,7 @@ const RegistrationForm: FC = () => {
             label="Повторите пароля"
             name="confirmPassword"
             value={values.confirmPassword}
+            sx={{ mb: 3 }}
             onChange={handleChange}
             helperText={errors.confirmPassword}
             error={!!errors.confirmPassword}
@@ -87,6 +99,7 @@ const RegistrationForm: FC = () => {
             name="groupId"
             label="Выберите группу"
             value={selectValue}
+            sx={{ mb: 1 }}
             onChange={(e) => {
               handleChange(e);
               handleSelect(e);
@@ -105,7 +118,7 @@ const RegistrationForm: FC = () => {
             sx={{
               color: "#fff",
               backgroundColor: "#1e202a",
-              width: "50%",
+              width: "55%",
               margin: "20px auto 0",
               border: "1px solid transparent",
               ":hover": {
@@ -117,7 +130,7 @@ const RegistrationForm: FC = () => {
           >
             Зарегистрироваться
           </Button>
-        </Box>
+        </RegistrationFormStyled>
       )}
     </Formik>
   );
