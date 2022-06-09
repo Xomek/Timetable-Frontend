@@ -32,6 +32,7 @@ const Week: FC<IWeekProps> = ({ week }) => {
     arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
+    accessibility: false,
     centerMode: true,
     variableWidth: true,
     focusOnSelect: true,

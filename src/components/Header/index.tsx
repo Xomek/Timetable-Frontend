@@ -16,6 +16,7 @@ import { LoginForm, RegistrationForm } from "../../components";
 import { useAuth } from "../../hooks/useAuth";
 import { logout } from "../../store/thunks/authThunks";
 import { useAppDispatch } from "../../store/hooks";
+import Settings from "../Settings";
 
 const HeaderStyled = styled(AppBar)({
   position: "static",
@@ -38,12 +39,8 @@ const Header: FC = () => {
   const { setVisibleModal, setContentModal } =
     useContext<IContextModal>(contextModal);
 
-  const userLinks: ILink[] = [
-    { text: "Расписание", to: "/timetable" },
-    { text: "Настройки", to: "/settings" },
-  ];
-
   const userButtons: IButton[] = [
+    { text: "Настройки", onClick: showModalWithSettings },
     { text: "Выйти", onClick: () => dispatch(logout()) },
   ];
   const guestButtons: IButton[] = [
@@ -61,6 +58,11 @@ const Header: FC = () => {
 
   function showModalWithRegistrationForm() {
     setContentModal(<RegistrationForm />);
+    setVisibleModal(true);
+  }
+
+  function showModalWithSettings() {
+    setContentModal(<Settings />);
     setVisibleModal(true);
   }
 
@@ -112,19 +114,6 @@ const Header: FC = () => {
           </Typography>
           {auth ? (
             <Box>
-              {userLinks.map((link) => (
-                <Button
-                  key={link.text}
-                  sx={{
-                    color: "white",
-                    boxShadow: "2px 2px 8px #000",
-                    padding: "5px 20px",
-                    ml: "10px",
-                  }}
-                >
-                  {link.text}
-                </Button>
-              ))}
               {userButtons.map((button) => (
                 <Button
                   key={button.text}

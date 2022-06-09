@@ -38,7 +38,39 @@ const Group: FC = () => {
           <TextField
             select
             label="Выберите группу"
-            sx={{ width: 300 }}
+            sx={{
+              margin: "0 auto",
+              display: "block",
+              maxWidth: 300,
+              "& div": {
+                width: "100%",
+              },
+              "& label": {
+                color: "#fff",
+                backgroundColor: "#2d333b",
+              },
+              "&:before": {
+                borderColor: "#fff",
+              },
+              "&:after": {
+                borderColor: "#fff",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "white",
+              },
+              "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                borderColor: "white",
+              },
+              borderRadius: 1,
+              "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                {
+                  borderColor: "white",
+                },
+
+              "&:hover .MuiInputLabel-root": {
+                color: "white",
+              },
+            }}
             value={selectValue}
             onChange={(e) => selectHandler(e)}
           >
@@ -55,7 +87,38 @@ const Group: FC = () => {
           <TextField
             select
             label="Выберите группу"
-            sx={{ width: 300 }}
+            sx={{
+              margin: "0 auto",
+              display: "block",
+              maxWidth: 300,
+              "& div": {
+                width: "100%",
+              },
+              "& label": {
+                color: "#fff",
+                backgroundColor: "#2d333b",
+              },
+              "&:before": {
+                borderColor: "#fff",
+              },
+              "&:after": {
+                borderColor: "#fff",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "white",
+              },
+              "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                borderColor: "white",
+              },
+              borderRadius: 1,
+              "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                {
+                  borderColor: "white",
+                },
+              "&:hover .MuiInputLabel-root": {
+                color: "white",
+              },
+            }}
             value={selectValue}
             onChange={(e) => selectHandler(e)}
           >
