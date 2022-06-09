@@ -15,7 +15,6 @@ import { registrationFormSchema } from "../../yup/registrationForm.shema";
 
 const RegistrationFormStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
   minHeight: 700,
-  height: "100vh",
   maxWidth: 500,
   width: "100%",
   margin: "0 auto",
@@ -25,6 +24,9 @@ const RegistrationFormStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
   backgroundColor: "#fff",
   padding: "60px 30px",
   borderRadius: "8px",
+  [theme.breakpoints.down("sm")]: {
+    height: "100vh",
+  },
 }));
 
 const RegistrationForm: FC = () => {
