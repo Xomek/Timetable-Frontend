@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getGroup, getGroupList } from "../../store/thunks/groupsThunks";
-import Weeks from "../Weeks";
+import Weeks from "./Weeks";
 
 const Group: FC = () => {
   const auth = useAuth();

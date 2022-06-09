@@ -1,5 +1,5 @@
 import { FC, ReactNode, useRef, useState } from "react";
-import { IWeek } from "../../interfaces/week.interface";
+import { IWeek } from "../../../interfaces/week.interface";
 import Week from "./Week";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

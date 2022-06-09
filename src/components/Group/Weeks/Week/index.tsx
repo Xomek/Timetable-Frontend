@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IWeek } from "../../../interfaces/week.interface";
+import { IWeek } from "../../../../interfaces/week.interface";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
