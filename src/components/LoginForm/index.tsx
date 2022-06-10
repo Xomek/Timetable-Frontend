@@ -1,18 +1,11 @@
-import {
-  Button,
-  Box,
-  Typography,
-  TextField,
-  Theme,
-  styled,
-} from "@mui/material";
+import { Button, Typography, TextField, Theme, styled } from "@mui/material";
 import { FC } from "react";
 import { Formik } from "formik";
 import { loginFormSchema } from "../../yup/loginForm.shema";
 import { useAppDispatch } from "../../store/hooks";
 import { loginUser } from "../../store/thunks/authThunks";
 
-const LoginFormStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
+const LoginFormStyled = styled("form")(({ theme }: { theme: Theme }) => ({
   minHeight: 500,
   maxWidth: 500,
   width: "100%",
@@ -41,7 +34,7 @@ const LoginForm: FC = () => {
       validationSchema={loginFormSchema}
     >
       {({ values, handleChange, handleSubmit, errors }) => (
-        <LoginFormStyled component="form" onSubmit={() => handleSubmit()}>
+        <LoginFormStyled onSubmit={handleSubmit}>
           <Typography
             sx={{
               fontSize: "30px",

@@ -13,21 +13,23 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { registrationUser } from "../../store/thunks/authThunks";
 import { registrationFormSchema } from "../../yup/registrationForm.shema";
 
-const RegistrationFormStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
-  minHeight: 700,
-  maxWidth: 500,
-  width: "100%",
-  margin: "0 auto",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  backgroundColor: "#fff",
-  padding: "60px 30px",
-  borderRadius: "8px",
-  [theme.breakpoints.down("sm")]: {
-    height: "100vh",
-  },
-}));
+const RegistrationFormStyled = styled("form")(
+  ({ theme }: { theme: Theme }) => ({
+    minHeight: 700,
+    maxWidth: 500,
+    width: "100%",
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    padding: "60px 30px",
+    borderRadius: "8px",
+    [theme.breakpoints.down("sm")]: {
+      height: "100vh",
+    },
+  })
+);
 
 const RegistrationForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -52,10 +54,7 @@ const RegistrationForm: FC = () => {
       validationSchema={registrationFormSchema}
     >
       {({ values, handleSubmit, handleChange, errors }) => (
-        <RegistrationFormStyled
-          component="form"
-          onSubmit={() => handleSubmit()}
-        >
+        <RegistrationFormStyled onSubmit={handleSubmit}>
           <Typography
             sx={{
               fontSize: "30px",
