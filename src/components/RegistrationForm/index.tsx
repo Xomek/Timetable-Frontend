@@ -1,17 +1,10 @@
-import {
-  Button,
-  Box,
-  Typography,
-  TextField,
-  MenuItem,
-  Theme,
-  styled,
-} from "@mui/material";
+import { Button, Typography, TextField, Theme, styled } from "@mui/material";
 import { Formik } from "formik";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { registrationUser } from "../../store/thunks/authThunks";
 import { registrationFormSchema } from "../../yup/registrationForm.shema";
+import AppSelect from "../AppSelect";
 
 const RegistrationFormStyled = styled("form")(
   ({ theme }: { theme: Theme }) => ({
@@ -33,14 +26,7 @@ const RegistrationFormStyled = styled("form")(
 
 const RegistrationForm: FC = () => {
   const dispatch = useAppDispatch();
-  const [selectValue, setSelectValue] = useState<string>("");
   const { groupList } = useAppSelector((state) => state.groups);
-
-  function handleSelect(
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) {
-    setSelectValue(e.target.value);
-  }
 
   return (
     <Formik
@@ -50,7 +36,9 @@ const RegistrationForm: FC = () => {
         confirmPassword: "",
         groupId: "",
       }}
-      onSubmit={(values) => dispatch(registrationUser(values))}
+      onSubmit={(values) => {
+        dispatch(registrationUser(values));
+      }}
       validationSchema={registrationFormSchema}
     >
       {({ values, handleSubmit, handleChange, errors }) => (
@@ -95,25 +83,15 @@ const RegistrationForm: FC = () => {
             helperText={errors.confirmPassword}
             error={!!errors.confirmPassword}
           />
-          <TextField
-            select
-            name="groupId"
+          <AppSelect
             label="Выберите группу"
-            value={selectValue}
-            sx={{ mb: 1 }}
-            onChange={(e) => {
-              handleChange(e);
-              handleSelect(e);
-            }}
+            name="groupId"
+            options={groupList}
+            onChange={handleChange}
+            value={values.groupId}
             helperText={errors.groupId}
             error={!!errors.groupId}
-          >
-            {groupList.map((group) => (
-              <MenuItem key={group.id} value={group.id}>
-                {group.title}
-              </MenuItem>
-            ))}
-          </TextField>
+          />
           <Button
             type="submit"
             sx={{
