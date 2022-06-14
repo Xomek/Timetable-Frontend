@@ -1,5 +1,8 @@
 import { Typography, Box, Tabs, Tab, TextField } from "@mui/material";
 import { FC, SyntheticEvent, useState } from "react";
+import { useAppSelector } from "../../store/hooks";
+import AppSelect from "../AppSelect";
+import SelectGroup from "../AppSelect";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -35,6 +38,7 @@ function a11yProps(index: number) {
 }
 
 const Settings: FC = () => {
+  const groupList = useAppSelector((state) => state.groups.groupList);
   const [value, setValue] = useState(0);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -68,24 +72,20 @@ const Settings: FC = () => {
           aria-label="Vertical tabs example"
           sx={{ borderRight: 1, borderColor: "divider", width: 300 }}
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Пароль" {...a11yProps(0)} />
+          <Tab label="Группа" {...a11yProps(1)} />
         </Tabs>
         <TabPanel value={value} index={0}>
-          <TextField sx={{ mb: 2 }} placeholder="Логин" />
           <TextField sx={{ mb: 2 }} placeholder="Пароль" />
-          <TextField placeholder="Роль" />
+          <TextField placeholder="Новый пароль" />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <TextField sx={{ mb: 2 }} placeholder="Тест" />
-          <TextField sx={{ mb: 2 }} placeholder="Тест" />
-          <TextField placeholder="Тест" />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <TextField sx={{ mb: 2 }} placeholder="123" />
-          <TextField sx={{ mb: 2 }} placeholder="Тест" />
-          <TextField placeholder="12" />
+          <TextField sx={{ mb: 2 }} placeholder="Пароль" />
+          <AppSelect
+            sx={{ width: "100%" }}
+            label="Выберите группу"
+            options={groupList}
+          />
         </TabPanel>
       </Box>
     </Box>
