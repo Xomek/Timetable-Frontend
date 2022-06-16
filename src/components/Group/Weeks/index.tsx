@@ -28,13 +28,10 @@ const Weeks: FC<IWeeksProps> = ({ weeks }) => {
     slidesToScroll: 1,
     swipe: false,
     appendDots: appendDots,
+    initialSlide: Number(!weekTypeNow),
   };
 
   const sliderRef = useRef<any>(null);
-
-  useEffect(() => {
-    sliderRef.current.slickGoTo(Number(!weekTypeNow));
-  }, []);
 
   function appendDots(dots: ReactNode[]) {
     return (
