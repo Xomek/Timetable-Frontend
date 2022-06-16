@@ -33,7 +33,16 @@ const LoginForm: FC = () => {
       }}
       validationSchema={loginFormSchema}
     >
-      {({ values, handleChange, handleSubmit, touched, errors }) => (
+      {({
+        values,
+        handleChange,
+        handleSubmit,
+        handleBlur,
+        touched,
+        isValid,
+        dirty,
+        errors,
+      }) => (
         <LoginFormStyled onSubmit={handleSubmit}>
           <Typography
             sx={{
@@ -53,6 +62,7 @@ const LoginForm: FC = () => {
             value={values.login}
             sx={{ mb: 3 }}
             onChange={handleChange}
+            onBlur={handleBlur}
             helperText={touched.login && errors.login}
             error={touched.login && !!errors.login}
           />
@@ -63,6 +73,7 @@ const LoginForm: FC = () => {
             value={values.password}
             sx={{ mb: 1 }}
             onChange={handleChange}
+            onBlur={handleBlur}
             helperText={touched.password && errors.password}
             error={touched.password && !!errors.password}
           />

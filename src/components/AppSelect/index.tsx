@@ -19,6 +19,7 @@ interface IAppSelectProps {
   helperText?: string | boolean;
   error?: boolean;
   onChange?: (arg?: any) => void;
+  onBlur?: (arg?: any) => void;
 }
 
 const AppSelect: FC<IAppSelectProps> = ({
@@ -29,6 +30,7 @@ const AppSelect: FC<IAppSelectProps> = ({
   error,
   helperText,
   onChange,
+  onBlur,
   ...props
 }) => {
   const [selected, setSelected] = useState<string>("");
@@ -47,6 +49,7 @@ const AppSelect: FC<IAppSelectProps> = ({
         label={label}
         value={value ? value : selected}
         onChange={onChangeSelect}
+        onBlur={onBlur}
         {...props}
       >
         {options.map((option: { id: string; title: string }) => (

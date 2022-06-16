@@ -41,7 +41,14 @@ const RegistrationForm: FC = () => {
       }}
       validationSchema={registrationFormSchema}
     >
-      {({ values, handleSubmit, handleChange, touched, errors }) => (
+      {({
+        values,
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        touched,
+        errors,
+      }) => (
         <RegistrationFormStyled onSubmit={handleSubmit}>
           <Typography
             sx={{
@@ -60,6 +67,7 @@ const RegistrationForm: FC = () => {
             value={values.login}
             sx={{ mb: 3 }}
             onChange={handleChange}
+            onBlur={handleBlur}
             helperText={touched.login && errors.login}
             error={touched.login && !!errors.login}
           />
@@ -70,6 +78,7 @@ const RegistrationForm: FC = () => {
             value={values.password}
             sx={{ mb: 3 }}
             onChange={handleChange}
+            onBlur={handleBlur}
             helperText={touched.password && errors.password}
             error={touched.password && !!errors.password}
           />
@@ -80,6 +89,7 @@ const RegistrationForm: FC = () => {
             value={values.confirmPassword}
             sx={{ mb: 3 }}
             onChange={handleChange}
+            onBlur={handleBlur}
             helperText={touched.confirmPassword && errors.confirmPassword}
             error={touched.confirmPassword && !!errors.confirmPassword}
           />
@@ -88,6 +98,7 @@ const RegistrationForm: FC = () => {
             name="groupId"
             options={groupList}
             onChange={handleChange}
+            onBlur={handleBlur}
             value={values.groupId}
             helperText={touched.groupId && errors.groupId}
             error={touched.groupId && !!errors.groupId}
