@@ -16,7 +16,7 @@ interface IAppSelectProps {
   options: { id: string; title: string }[];
   value?: string;
   name?: string;
-  helperText?: string;
+  helperText?: string | boolean;
   error?: boolean;
   onChange?: (arg?: any) => void;
 }

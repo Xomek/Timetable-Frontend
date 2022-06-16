@@ -41,7 +41,7 @@ const RegistrationForm: FC = () => {
       }}
       validationSchema={registrationFormSchema}
     >
-      {({ values, handleSubmit, handleChange, errors }) => (
+      {({ values, handleSubmit, handleChange, touched, errors }) => (
         <RegistrationFormStyled onSubmit={handleSubmit}>
           <Typography
             sx={{
@@ -60,8 +60,8 @@ const RegistrationForm: FC = () => {
             value={values.login}
             sx={{ mb: 3 }}
             onChange={handleChange}
-            helperText={errors.login}
-            error={!!errors.login}
+            helperText={touched.login && errors.login}
+            error={touched.login && !!errors.login}
           />
           <TextField
             type="password"
@@ -70,8 +70,8 @@ const RegistrationForm: FC = () => {
             value={values.password}
             sx={{ mb: 3 }}
             onChange={handleChange}
-            helperText={errors.password}
-            error={!!errors.password}
+            helperText={touched.password && errors.password}
+            error={touched.password && !!errors.password}
           />
           <TextField
             type="password"
@@ -80,8 +80,8 @@ const RegistrationForm: FC = () => {
             value={values.confirmPassword}
             sx={{ mb: 3 }}
             onChange={handleChange}
-            helperText={errors.confirmPassword}
-            error={!!errors.confirmPassword}
+            helperText={touched.confirmPassword && errors.confirmPassword}
+            error={touched.confirmPassword && !!errors.confirmPassword}
           />
           <AppSelect
             label="Выберите группу"
@@ -89,8 +89,8 @@ const RegistrationForm: FC = () => {
             options={groupList}
             onChange={handleChange}
             value={values.groupId}
-            helperText={errors.groupId}
-            error={!!errors.groupId}
+            helperText={touched.groupId && errors.groupId}
+            error={touched.groupId && !!errors.groupId}
           />
           <Button
             type="submit"
