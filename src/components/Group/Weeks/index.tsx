@@ -1,4 +1,4 @@
-import { FC, ReactNode, useRef, useState } from "react";
+import { FC, ReactNode, useEffect, useRef, useState } from "react";
 import { IWeek } from "../../../interfaces/week.interface";
 import Week from "./Week";
 import "slick-carousel/slick/slick.css";
@@ -6,13 +6,18 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Settings } from "react-slick";
 import { Box, Button } from "@mui/material";
+import { getWeekType } from "../../../helpers/getWeekType";
 
 interface IWeeksProps {
   weeks: IWeek[];
 }
 
 const Weeks: FC<IWeeksProps> = ({ weeks }) => {
-  const [activeButton, setActiveButton] = useState<boolean>(true);
+  const weekTypeNow = getWeekType();
+  const [activeButton, setActiveButton] = useState<boolean>(weekTypeNow);
+
+  const evenWeek = weeks.find((week) => week.isEven);
+  const oddWeek = weeks.find((week) => !week.isEven);
 
   const settings: Settings = {
     infinite: false,
@@ -27,6 +32,10 @@ const Weeks: FC<IWeeksProps> = ({ weeks }) => {
 
   const sliderRef = useRef<any>(null);
 
+  useEffect(() => {
+    sliderRef.current.slickGoTo(Number(!weekTypeNow));
+  }, []);
+
   function appendDots(dots: ReactNode[]) {
     return (
       <ul className="week-dots">
@@ -40,9 +49,8 @@ const Weeks: FC<IWeeksProps> = ({ weeks }) => {
   return (
     <div>
       <Slider ref={sliderRef} {...settings}>
-        {weeks.map((week) => (
-          <Week key={week.id} week={week} />
-        ))}
+        {evenWeek && <Week week={evenWeek} />}
+        {oddWeek && <Week week={oddWeek} />}
       </Slider>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         {appendDots([

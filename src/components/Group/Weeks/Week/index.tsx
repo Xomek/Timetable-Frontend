@@ -5,13 +5,10 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Settings } from "react-slick";
 import Day from "./Day";
-import { styled } from "@mui/material";
 
 interface IWeekProps {
   week: IWeek;
 }
-
-const SliderStyled = styled(Slider)({});
 
 const Week: FC<IWeekProps> = ({ week }) => {
   const settings: Settings = {

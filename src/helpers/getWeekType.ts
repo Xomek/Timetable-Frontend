@@ -4,5 +4,5 @@ export const getWeekType = () => {
     d1 = d.getTime(),
     dd = d.getDay(),
     re = Math.floor((d0 - d1) / 8.64e7) + (dd ? dd - 1 : 6);
-  return Math.floor(re / 7) % 2 ? 1 : 0;
+  return Math.floor(re / 7) % 2 ? true : false;
 };
