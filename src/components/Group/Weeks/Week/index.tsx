@@ -41,13 +41,11 @@ const Week: FC<IWeekProps> = ({ week }) => {
   };
 
   return (
-    <>
-      <Slider {...settings}>
-        {week.days.map((day) => (
-          <Day key={day.id} day={day} />
-        ))}
-      </Slider>
-    </>
+    <Slider {...settings}>
+      {week.days.map((day) => (
+        <Day key={day.id} day={day} />
+      ))}
+    </Slider>
   );
 };
 
