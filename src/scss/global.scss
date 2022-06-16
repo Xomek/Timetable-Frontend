@@ -10,41 +10,29 @@ body {
   justify-content: space-between;
 }
 
-.slick-slide {
-  width: 400px;
-
-  transition: all 0.4s;
-}
-
-.slick-slide > div {
-  margin: 0 20px;
-  height: 460px;
-}
-
-.slick-list {
-  margin: 0 -20px;
-}
-
-.slick-track {
-  padding: 7% 0;
-}
-
-.slick-center {
-  transition: all 0.5s;
-  transform: scale(1.3);
-  > div {
-    box-shadow: 0px 0px 40px #2d333b;
+.slider-day {
+  margin: 20px 0;
+  .slick-track {
+    padding: 70px 0;
   }
-}
-
-.slick-arrow {
-  top: -20px;
-}
-.slick-prev {
-  left: 0px;
-}
-.slick-next {
-  right: 0px;
+  div > .slick-slide {
+    width: 400px;
+    transition: all 0.4s;
+    > div {
+      height: 460px;
+      margin: 0 20px;
+    }
+  }
+  .slick-list {
+    margin: 0 -20px;
+  }
+  .slick-center {
+    transition: all 0.5s;
+    transform: scale(1.3);
+    > div {
+      box-shadow: 0px 0px 40px #2d333b;
+    }
+  }
 }
 
 .week-dots {
