@@ -94,6 +94,7 @@ const RegistrationForm: FC = () => {
             error={touched.confirmPassword && !!errors.confirmPassword}
           />
           <AppSelect
+            sx={{ mb: 1 }}
             label="Выберите группу"
             name="groupId"
             options={groupList}
