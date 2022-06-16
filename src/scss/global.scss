@@ -35,6 +35,19 @@ body {
   }
 }
 
+@media (max-width: 400px) {
+  .slider-day {
+    .slick-track {
+      padding: 0;
+    }
+  }
+  div > .slick-slide {
+    > div {
+      height: 300px;
+    }
+  }
+}
+
 .week-dots {
   position: absolute;
   bottom: 9%;
