@@ -1,19 +1,20 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { IWeek } from "../../../../interfaces/week.interface";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Settings } from "react-slick";
 import Day from "./Day";
-import { styled } from "@mui/material";
+import { getDay } from "../../../../helpers/getDay";
 
 interface IWeekProps {
   week: IWeek;
 }
 
-const SliderStyled = styled(Slider)({});
-
 const Week: FC<IWeekProps> = ({ week }) => {
+  const sliderRef = useRef<any>(null);
+  const dayNow = getDay();
+
   const settings: Settings = {
     speed: 500,
     arrows: false,
@@ -23,6 +24,7 @@ const Week: FC<IWeekProps> = ({ week }) => {
     centerMode: true,
     variableWidth: true,
     focusOnSelect: true,
+    initialSlide: dayNow,
     responsive: [
       {
         breakpoint: 1100,
@@ -44,7 +46,7 @@ const Week: FC<IWeekProps> = ({ week }) => {
   };
 
   return (
-    <Slider className="slider-day" {...settings}>
+    <Slider ref={sliderRef} className="slider-day" {...settings}>
       {week.days.map((day) => (
         <Day key={day.id} day={day} />
       ))}
