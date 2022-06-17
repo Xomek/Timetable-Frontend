@@ -43,7 +43,7 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ pl: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -71,6 +71,7 @@ const Settings: FC = () => {
   return (
     <SettingsStyled>
       <Typography
+        component={"span"}
         sx={{
           fontSize: "30px",
           textAlign: "center",
@@ -87,23 +88,35 @@ const Settings: FC = () => {
           value={value}
           onChange={handleChange}
           aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: "divider", width: 300 }}
+          sx={{
+            borderRight: 1,
+            borderColor: "divider",
+            width: 300,
+          }}
         >
-          <Tab label="Пароль" {...a11yProps(0)} />
-          <Tab label="Группа" {...a11yProps(1)} />
+          {roleTitles.includes("student") && [
+            <Tab key={"password"} label="Пароль" {...a11yProps(0)} />,
+            <Tab key={"group"} label="Группа" {...a11yProps(1)} />,
+          ]}
+          {roleTitles.includes("headman") && "Староста"}
+          {roleTitles.includes("admin") && ""}
         </Tabs>
-        <TabPanel value={value} index={0}>
-          <TextField sx={{ mb: 2 }} placeholder="Пароль" />
-          <TextField placeholder="Новый пароль" />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <TextField sx={{ mb: 2 }} placeholder="Пароль" />
-          <AppSelect
-            sx={{ width: "100%" }}
-            label="Выберите группу"
-            options={groupList}
-          />
-        </TabPanel>
+        {roleTitles.includes("student") && (
+          <>
+            <TabPanel value={value} index={0}>
+              <TextField sx={{ mb: 2 }} placeholder="Пароль" />
+              <TextField placeholder="Новый пароль" />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <TextField sx={{ mb: 2 }} placeholder="Пароль" />
+              <AppSelect
+                sx={{ width: "100%" }}
+                label="Выберите группу"
+                options={groupList}
+              />
+            </TabPanel>
+          </>
+        )}
       </Box>
     </SettingsStyled>
   );
