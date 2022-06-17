@@ -1,8 +1,28 @@
-import { Typography, Box, Tabs, Tab, TextField } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Tabs,
+  Tab,
+  TextField,
+  styled,
+  Theme,
+} from "@mui/material";
 import { FC, SyntheticEvent, useState } from "react";
 import { useAppSelector } from "../../store/hooks";
 import AppSelect from "../AppSelect";
-import SelectGroup from "../AppSelect";
+
+const SettingsStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
+  backgroundColor: "#fff",
+  padding: "60px 30px",
+  borderRadius: "8px",
+  [theme.breakpoints.down("sm")]: {
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+}));
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -46,13 +66,7 @@ const Settings: FC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "#fff",
-        padding: "60px 30px",
-        borderRadius: "8px",
-      }}
-    >
+    <SettingsStyled>
       <Typography
         sx={{
           fontSize: "30px",
@@ -88,7 +102,7 @@ const Settings: FC = () => {
           />
         </TabPanel>
       </Box>
-    </Box>
+    </SettingsStyled>
   );
 };
 
