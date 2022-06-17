@@ -59,7 +59,10 @@ function a11yProps(index: number) {
 
 const Settings: FC = () => {
   const groupList = useAppSelector((state) => state.groups.groupList);
+  const { userRoles } = useAppSelector((state) => state.auth.user);
   const [value, setValue] = useState(0);
+
+  const roleTitles = userRoles.map((role) => role.title);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);

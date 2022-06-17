@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAuthResponse } from "../../interfaces/authResponse.interface";
+import { IRole } from "../../interfaces/role.interfase";
 import { IUser } from "../../interfaces/user.interface";
 import {
   loginUser,
@@ -60,10 +61,11 @@ const authSlice = createSlice({
     },
     [refreshUserToken.fulfilled.type]: (
       state,
-      action: PayloadAction<{ token: string }>
+      action: PayloadAction<{ token: string; userRoles: IRole[] }>
     ) => {
       state.auth = true;
       state.token = action.payload.token;
+      state.user.userRoles = action.payload.userRoles;
     },
     [logout.fulfilled.type]: (state) => {
       state.auth = false;

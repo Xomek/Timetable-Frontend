@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import $api, { API_URL } from "../../axios";
 import { IAuthResponse } from "../../interfaces/authResponse.interface";
+import { IRole } from "../../interfaces/role.interfase";
 import { IUserCredentials } from "../../interfaces/userCredentials.interface";
 
 export const loginUser = createAsyncThunk(
@@ -60,7 +61,7 @@ export const refreshUserToken = createAsyncThunk(
   "auth/refreshUserToken",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get<{ token: string }>(
+      const response = await axios.get<{ token: string; userRoles: IRole[] }>(
         `${API_URL}/auth/refresh`,
         {
           withCredentials: true,
