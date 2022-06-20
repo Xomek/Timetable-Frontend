@@ -6,9 +6,12 @@ import {
   TextField,
   styled,
   Theme,
+  Button,
 } from "@mui/material";
+import { useFormik } from "formik";
 import { FC, SyntheticEvent, useState } from "react";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { changeGroup, changePassword } from "../../store/thunks/settingsThunks";
 import AppSelect from "../AppSelect";
 
 const SettingsStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
@@ -43,7 +46,7 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ pl: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -59,7 +62,25 @@ function a11yProps(index: number) {
 
 const Settings: FC = () => {
   const groupList = useAppSelector((state) => state.groups.groupList);
+
+  const { userRoles } = useAppSelector((state) => state.auth.user);
   const [value, setValue] = useState(0);
+  const dispatch = useAppDispatch();
+
+  const roleTitles = userRoles.map((role) => role.title);
+
+  const formikForPassword = useFormik({
+    initialValues: { oldPassword: "", newPassword: "" },
+    onSubmit: (values) => {
+      dispatch(changePassword(values));
+    },
+  });
+  const formikForGroup = useFormik({
+    initialValues: { id: "" },
+    onSubmit: (values) => {
+      dispatch(changeGroup(values));
+    },
+  });
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -68,6 +89,7 @@ const Settings: FC = () => {
   return (
     <SettingsStyled>
       <Typography
+        component={"h2"}
         sx={{
           fontSize: "30px",
           textAlign: "center",
@@ -84,23 +106,76 @@ const Settings: FC = () => {
           value={value}
           onChange={handleChange}
           aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: "divider", width: 300 }}
+          sx={{
+            borderRight: 1,
+            borderColor: "divider",
+            width: 300,
+          }}
         >
-          <Tab label="Пароль" {...a11yProps(0)} />
-          <Tab label="Группа" {...a11yProps(1)} />
+          {roleTitles.includes("student") && [
+            <Tab key={"password"} label="Пароль" {...a11yProps(0)} />,
+            <Tab key={"group"} label="Группа" {...a11yProps(1)} />,
+          ]}
+          {roleTitles.includes("headman") && [
+            <Tab
+              key={"password"}
+              label="Изменить расписание"
+              {...a11yProps(2)}
+            />,
+          ]}
+          {roleTitles.includes("admin") && ""}
         </Tabs>
-        <TabPanel value={value} index={0}>
-          <TextField sx={{ mb: 2 }} placeholder="Пароль" />
-          <TextField placeholder="Новый пароль" />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <TextField sx={{ mb: 2 }} placeholder="Пароль" />
-          <AppSelect
-            sx={{ width: "100%" }}
-            label="Выберите группу"
-            options={groupList}
-          />
-        </TabPanel>
+        {roleTitles.includes("student") && (
+          <>
+            <TabPanel value={value} index={0}>
+              <Box component="form" onSubmit={formikForPassword.handleSubmit}>
+                <TextField
+                  sx={{ mb: 2 }}
+                  type="password"
+                  placeholder="Пароль"
+                  name="oldPassword"
+                  value={formikForPassword.values.oldPassword}
+                  onChange={formikForPassword.handleChange}
+                  onBlur={formikForPassword.handleBlur}
+                />
+                <TextField
+                  type="password"
+                  placeholder="Новый пароль"
+                  name="newPassword"
+                  value={formikForPassword.values.newPassword}
+                  onChange={formikForPassword.handleChange}
+                  onBlur={formikForPassword.handleBlur}
+                  sx={{ mb: 2 }}
+                />
+                <Button type="submit" sx={{ width: "100%" }}>
+                  Подтвердить
+                </Button>
+              </Box>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <Box component="form" onSubmit={formikForGroup.handleSubmit}>
+                <AppSelect
+                  sx={{ width: "100%" }}
+                  name="id"
+                  label="Выберите группу"
+                  options={groupList}
+                  value={formikForGroup.values.id}
+                  onChange={formikForGroup.handleChange}
+                  onBlur={formikForGroup.handleBlur}
+                />
+                <Button type="submit" sx={{ width: "100%" }}>
+                  Подтвердить
+                </Button>
+              </Box>
+            </TabPanel>
+          </>
+        )}
+        {roleTitles.includes("headman") && (
+          <>
+            <TabPanel value={value} index={2}></TabPanel>
+          </>
+        )}
+        {roleTitles.includes("admin") && <></>}
       </Box>
     </SettingsStyled>
   );

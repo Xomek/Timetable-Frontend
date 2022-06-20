@@ -10,7 +10,6 @@ import {
   Theme,
 } from "@mui/material";
 import { IButton } from "../../interfaces/button.interface.interface";
-import { ILink } from "../../interfaces/link.interface.interface";
 import { contextModal, IContextModal } from "../../App";
 import { LoginForm, RegistrationForm } from "../../components";
 import { useAuth } from "../../hooks/useAuth";

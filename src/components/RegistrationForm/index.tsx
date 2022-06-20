@@ -1,5 +1,5 @@
 import { Button, Typography, TextField, Theme, styled } from "@mui/material";
-import { Formik } from "formik";
+import { useFormik } from "formik";
 import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { registrationUser } from "../../store/thunks/authThunks";
@@ -28,102 +28,97 @@ const RegistrationForm: FC = () => {
   const dispatch = useAppDispatch();
   const { groupList } = useAppSelector((state) => state.groups);
 
+  const formik = useFormik({
+    initialValues: {
+      login: "",
+      password: "",
+      confirmPassword: "",
+      groupId: "",
+    },
+    validationSchema: registrationFormSchema,
+    onSubmit: (values) => {
+      dispatch(registrationUser(values));
+    },
+  });
+
   return (
-    <Formik
-      initialValues={{
-        login: "",
-        password: "",
-        confirmPassword: "",
-        groupId: "",
-      }}
-      onSubmit={(values) => {
-        dispatch(registrationUser(values));
-      }}
-      validationSchema={registrationFormSchema}
-    >
-      {({
-        values,
-        handleSubmit,
-        handleChange,
-        handleBlur,
-        touched,
-        errors,
-      }) => (
-        <RegistrationFormStyled onSubmit={handleSubmit}>
-          <Typography
-            sx={{
-              fontSize: "30px",
-              textAlign: "center",
-              mb: "30px",
-              color: "#1e202a",
-            }}
-          >
-            Регистрация
-          </Typography>
-          <TextField
-            type="text"
-            label="Логин"
-            name="login"
-            value={values.login}
-            sx={{ mb: 3 }}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched.login && errors.login}
-            error={touched.login && !!errors.login}
-          />
-          <TextField
-            type="password"
-            label="Пароль"
-            name="password"
-            value={values.password}
-            sx={{ mb: 3 }}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched.password && errors.password}
-            error={touched.password && !!errors.password}
-          />
-          <TextField
-            type="password"
-            label="Повторите пароля"
-            name="confirmPassword"
-            value={values.confirmPassword}
-            sx={{ mb: 3 }}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched.confirmPassword && errors.confirmPassword}
-            error={touched.confirmPassword && !!errors.confirmPassword}
-          />
-          <AppSelect
-            sx={{ mb: 1 }}
-            label="Выберите группу"
-            name="groupId"
-            options={groupList}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.groupId}
-            helperText={touched.groupId && errors.groupId}
-            error={touched.groupId && !!errors.groupId}
-          />
-          <Button
-            type="submit"
-            sx={{
-              color: "#fff",
-              backgroundColor: "#1e202a",
-              width: "55%",
-              margin: "20px auto 0",
-              border: "1px solid transparent",
-              ":hover": {
-                color: "#1e202a",
-                backgroundColor: "#fff",
-                border: "1px solid #1e202a",
-              },
-            }}
-          >
-            Зарегистрироваться
-          </Button>
-        </RegistrationFormStyled>
-      )}
-    </Formik>
+    <RegistrationFormStyled onSubmit={formik.handleSubmit}>
+      <Typography
+        sx={{
+          fontSize: "30px",
+          textAlign: "center",
+          mb: "30px",
+          color: "#1e202a",
+        }}
+      >
+        Регистрация
+      </Typography>
+      <TextField
+        type="text"
+        label="Логин"
+        name="login"
+        value={formik.values.login}
+        sx={{ mb: 3 }}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        helperText={formik.touched.login && formik.errors.login}
+        error={formik.touched.login && !!formik.errors.login}
+      />
+      <TextField
+        type="password"
+        label="Пароль"
+        name="password"
+        value={formik.values.password}
+        sx={{ mb: 3 }}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        helperText={formik.touched.password && formik.errors.password}
+        error={formik.touched.password && !!formik.errors.password}
+      />
+      <TextField
+        type="password"
+        label="Повторите пароля"
+        name="confirmPassword"
+        value={formik.values.confirmPassword}
+        sx={{ mb: 3 }}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        helperText={
+          formik.touched.confirmPassword && formik.errors.confirmPassword
+        }
+        error={
+          formik.touched.confirmPassword && !!formik.errors.confirmPassword
+        }
+      />
+      <AppSelect
+        sx={{ mb: 1 }}
+        label="Выберите группу"
+        name="groupId"
+        options={groupList}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.groupId}
+        helperText={formik.touched.groupId && formik.errors.groupId}
+        error={formik.touched.groupId && !!formik.errors.groupId}
+      />
+      <Button
+        type="submit"
+        sx={{
+          color: "#fff",
+          backgroundColor: "#1e202a",
+          width: "55%",
+          margin: "20px auto 0",
+          border: "1px solid transparent",
+          ":hover": {
+            color: "#1e202a",
+            backgroundColor: "#fff",
+            border: "1px solid #1e202a",
+          },
+        }}
+      >
+        Зарегистрироваться
+      </Button>
+    </RegistrationFormStyled>
   );
 };
 
