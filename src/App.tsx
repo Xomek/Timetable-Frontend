@@ -14,7 +14,7 @@ import { Header } from "./components";
 import Footer from "./components/Footer";
 import { useAuth } from "./hooks/useAuth";
 import { Home } from "./pages";
-import { theme } from "./scss/theme";
+import { theme } from "./styles/theme";
 import { useAppDispatch } from "./store/hooks";
 import { refreshUserToken } from "./store/thunks/authThunks";
 
