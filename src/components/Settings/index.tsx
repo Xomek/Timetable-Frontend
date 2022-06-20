@@ -6,9 +6,12 @@ import {
   TextField,
   styled,
   Theme,
+  Button,
 } from "@mui/material";
+import { Formik } from "formik";
 import { FC, SyntheticEvent, useState } from "react";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { changeGroup, changePassword } from "../../store/thunks/settingsThunks";
 import AppSelect from "../AppSelect";
 
 const SettingsStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
@@ -59,8 +62,10 @@ function a11yProps(index: number) {
 
 const Settings: FC = () => {
   const groupList = useAppSelector((state) => state.groups.groupList);
+
   const { userRoles } = useAppSelector((state) => state.auth.user);
   const [value, setValue] = useState(0);
+  const dispatch = useAppDispatch();
 
   const roleTitles = userRoles.map((role) => role.title);
 
@@ -71,7 +76,7 @@ const Settings: FC = () => {
   return (
     <SettingsStyled>
       <Typography
-        component={"span"}
+        component={"h2"}
         sx={{
           fontSize: "30px",
           textAlign: "center",
@@ -98,25 +103,84 @@ const Settings: FC = () => {
             <Tab key={"password"} label="Пароль" {...a11yProps(0)} />,
             <Tab key={"group"} label="Группа" {...a11yProps(1)} />,
           ]}
-          {roleTitles.includes("headman") && "Староста"}
+          {roleTitles.includes("headman") && [
+            <Tab
+              key={"password"}
+              label="Изменить расписание"
+              {...a11yProps(2)}
+            />,
+          ]}
           {roleTitles.includes("admin") && ""}
         </Tabs>
         {roleTitles.includes("student") && (
           <>
             <TabPanel value={value} index={0}>
-              <TextField sx={{ mb: 2 }} placeholder="Пароль" />
-              <TextField placeholder="Новый пароль" />
+              <Formik
+                initialValues={{ oldPassword: "", newPassword: "" }}
+                onSubmit={(values) => {
+                  dispatch(changePassword(values));
+                }}
+              >
+                {({ values, handleChange, handleSubmit, handleBlur }) => (
+                  <Box component="form" onSubmit={handleSubmit}>
+                    <TextField
+                      sx={{ mb: 2 }}
+                      type="password"
+                      placeholder="Пароль"
+                      name="oldPassword"
+                      value={values.oldPassword}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <TextField
+                      type="password"
+                      placeholder="Новый пароль"
+                      name="newPassword"
+                      value={values.newPassword}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      sx={{ mb: 2 }}
+                    />
+                    <Button type="submit" sx={{ width: "100%" }}>
+                      Подтвердить
+                    </Button>
+                  </Box>
+                )}
+              </Formik>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <TextField sx={{ mb: 2 }} placeholder="Пароль" />
-              <AppSelect
-                sx={{ width: "100%" }}
-                label="Выберите группу"
-                options={groupList}
-              />
+              <Formik
+                initialValues={{ id: "" }}
+                onSubmit={(values) => {
+                  dispatch(changeGroup(values));
+                }}
+              >
+                {({ values, handleChange, handleSubmit, handleBlur }) => (
+                  <Box component="form" onSubmit={handleSubmit}>
+                    <AppSelect
+                      sx={{ width: "100%" }}
+                      name="id"
+                      label="Выберите группу"
+                      options={groupList}
+                      value={values.id}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <Button type="submit" sx={{ width: "100%" }}>
+                      Подтвердить
+                    </Button>
+                  </Box>
+                )}
+              </Formik>
             </TabPanel>
           </>
         )}
+        {roleTitles.includes("headman") && (
+          <>
+            <TabPanel value={value} index={2}></TabPanel>
+          </>
+        )}
+        {roleTitles.includes("admin") && <></>}
       </Box>
     </SettingsStyled>
   );

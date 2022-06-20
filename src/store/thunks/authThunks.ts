@@ -61,16 +61,16 @@ export const refreshUserToken = createAsyncThunk(
   "auth/refreshUserToken",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get<{ token: string; userRoles: IRole[] }>(
-        `${API_URL}/auth/refresh`,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "x-user-id": localStorage.getItem("userId") || "",
-          },
-        }
-      );
+      const response = await axios.get<{
+        token: string;
+        userRoles: IRole[];
+      }>(`${API_URL}/auth/refresh`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "x-user-id": localStorage.getItem("userId") || "",
+        },
+      });
       localStorage.setItem("token", response.data.token);
       return response.data;
     } catch ({ message }) {

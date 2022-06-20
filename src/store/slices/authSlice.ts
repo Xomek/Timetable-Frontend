@@ -40,7 +40,6 @@ const authSlice = createSlice({
     ) => {
       state.auth = true;
       state.user.id = action.payload.userId;
-      state.loading = false;
     },
     [loginUser.pending.type]: (state) => {
       state.loading = true;
@@ -61,7 +60,10 @@ const authSlice = createSlice({
     },
     [refreshUserToken.fulfilled.type]: (
       state,
-      action: PayloadAction<{ token: string; userRoles: IRole[] }>
+      action: PayloadAction<{
+        token: string;
+        userRoles: IRole[];
+      }>
     ) => {
       state.auth = true;
       state.token = action.payload.token;

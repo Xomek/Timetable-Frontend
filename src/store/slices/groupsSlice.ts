@@ -19,7 +19,11 @@ const initialState: GroupsState = {
 const groupsSlice = createSlice({
   initialState,
   name: "groups",
-  reducers: {},
+  reducers: {
+    setGroup(state, action: PayloadAction<IGroup>) {
+      state.selectedGroup = action.payload;
+    },
+  },
   extraReducers: {
     [getGroupList.fulfilled.type]: (
       state,
@@ -42,5 +46,5 @@ const groupsSlice = createSlice({
   },
 });
 
-export const {} = groupsSlice.actions;
+export const { setGroup } = groupsSlice.actions;
 export default groupsSlice.reducer;
