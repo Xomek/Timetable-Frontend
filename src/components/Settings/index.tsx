@@ -8,7 +8,7 @@ import {
   Theme,
   Button,
 } from "@mui/material";
-import { Formik } from "formik";
+import { useFormik } from "formik";
 import { FC, SyntheticEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { changeGroup, changePassword } from "../../store/thunks/settingsThunks";
@@ -69,6 +69,19 @@ const Settings: FC = () => {
 
   const roleTitles = userRoles.map((role) => role.title);
 
+  const formikForPassword = useFormik({
+    initialValues: { oldPassword: "", newPassword: "" },
+    onSubmit: (values) => {
+      dispatch(changePassword(values));
+    },
+  });
+  const formikForGroup = useFormik({
+    initialValues: { id: "" },
+    onSubmit: (values) => {
+      dispatch(changeGroup(values));
+    },
+  });
+
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -115,63 +128,45 @@ const Settings: FC = () => {
         {roleTitles.includes("student") && (
           <>
             <TabPanel value={value} index={0}>
-              <Formik
-                initialValues={{ oldPassword: "", newPassword: "" }}
-                onSubmit={(values) => {
-                  dispatch(changePassword(values));
-                }}
-              >
-                {({ values, handleChange, handleSubmit, handleBlur }) => (
-                  <Box component="form" onSubmit={handleSubmit}>
-                    <TextField
-                      sx={{ mb: 2 }}
-                      type="password"
-                      placeholder="Пароль"
-                      name="oldPassword"
-                      value={values.oldPassword}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <TextField
-                      type="password"
-                      placeholder="Новый пароль"
-                      name="newPassword"
-                      value={values.newPassword}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      sx={{ mb: 2 }}
-                    />
-                    <Button type="submit" sx={{ width: "100%" }}>
-                      Подтвердить
-                    </Button>
-                  </Box>
-                )}
-              </Formik>
+              <Box component="form" onSubmit={formikForPassword.handleSubmit}>
+                <TextField
+                  sx={{ mb: 2 }}
+                  type="password"
+                  placeholder="Пароль"
+                  name="oldPassword"
+                  value={formikForPassword.values.oldPassword}
+                  onChange={formikForPassword.handleChange}
+                  onBlur={formikForPassword.handleBlur}
+                />
+                <TextField
+                  type="password"
+                  placeholder="Новый пароль"
+                  name="newPassword"
+                  value={formikForPassword.values.newPassword}
+                  onChange={formikForPassword.handleChange}
+                  onBlur={formikForPassword.handleBlur}
+                  sx={{ mb: 2 }}
+                />
+                <Button type="submit" sx={{ width: "100%" }}>
+                  Подтвердить
+                </Button>
+              </Box>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <Formik
-                initialValues={{ id: "" }}
-                onSubmit={(values) => {
-                  dispatch(changeGroup(values));
-                }}
-              >
-                {({ values, handleChange, handleSubmit, handleBlur }) => (
-                  <Box component="form" onSubmit={handleSubmit}>
-                    <AppSelect
-                      sx={{ width: "100%" }}
-                      name="id"
-                      label="Выберите группу"
-                      options={groupList}
-                      value={values.id}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <Button type="submit" sx={{ width: "100%" }}>
-                      Подтвердить
-                    </Button>
-                  </Box>
-                )}
-              </Formik>
+              <Box component="form" onSubmit={formikForGroup.handleSubmit}>
+                <AppSelect
+                  sx={{ width: "100%" }}
+                  name="id"
+                  label="Выберите группу"
+                  options={groupList}
+                  value={formikForGroup.values.id}
+                  onChange={formikForGroup.handleChange}
+                  onBlur={formikForGroup.handleBlur}
+                />
+                <Button type="submit" sx={{ width: "100%" }}>
+                  Подтвердить
+                </Button>
+              </Box>
             </TabPanel>
           </>
         )}
