@@ -40,6 +40,7 @@ const authSlice = createSlice({
     ) => {
       state.auth = true;
       state.user.id = action.payload.userId;
+      state.user.userRoles = action.payload.userRoles;
     },
     [loginUser.pending.type]: (state) => {
       state.loading = true;
