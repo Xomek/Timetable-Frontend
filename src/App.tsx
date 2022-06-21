@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { Close } from "@mui/icons-material";
-import { Box, Modal, styled } from "@mui/material";
+import { Box, CssBaseline, GlobalStyles, Modal, styled } from "@mui/material";
 import {
   createContext,
   Dispatch,
@@ -17,6 +17,7 @@ import { Home } from "./pages";
 import { theme } from "./styles/theme";
 import { useAppDispatch } from "./store/hooks";
 import { refreshUserToken } from "./store/thunks/authThunks";
+import { globalStyles } from "./styles/globalStyles";
 
 export interface IContextModal {
   setVisibleModal: Dispatch<SetStateAction<boolean>>;
@@ -49,6 +50,8 @@ const App: FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyles styles={globalStyles} />
+      <CssBaseline />
       <ModalStyled open={isVisibleModal} onClose={() => setVisibleModal(false)}>
         <Box
           sx={{
