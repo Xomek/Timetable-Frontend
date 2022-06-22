@@ -46,6 +46,7 @@ export const globalStyles: any = {
     position: "absolute",
     bottom: "9%",
     display: "flex",
+    padding: 0,
   },
 
   ["@media (maxWidth: 400)"]: {
