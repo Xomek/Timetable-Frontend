@@ -74,14 +74,14 @@ const LoginForm: FC = () => {
       <Button
         type="submit"
         sx={{
-          color: "#fff",
-          backgroundColor: "#1e202a",
+          color: "primary.contrastText",
+          backgroundColor: "primary.main",
           width: "50%",
           margin: "20px auto 0",
           border: "1px solid transparent",
           ":hover": {
             color: "#1e202a",
-            backgroundColor: "#fff",
+            backgroundColor: "primary.contrastText",
             border: "1px solid #1e202a",
           },
         }}

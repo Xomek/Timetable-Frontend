@@ -117,10 +117,10 @@ const Header: FC = () => {
                 <Button
                   key={button.text}
                   sx={{
-                    color: "white",
                     boxShadow: "2px 2px 8px #000",
                     padding: "5px 20px",
                     ml: "10px",
+                    color: "primary.contrastText",
                   }}
                   onClick={button.onClick}
                 >
@@ -134,10 +134,10 @@ const Header: FC = () => {
                 <Button
                   key={button.text}
                   sx={{
-                    color: "white",
                     boxShadow: "2px 2px 8px #000",
                     padding: "5px 20px",
                     ml: "10px",
+                    color: "primary.contrastText",
                   }}
                   onClick={button.onClick}
                 >

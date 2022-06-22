@@ -104,14 +104,14 @@ const RegistrationForm: FC = () => {
       <Button
         type="submit"
         sx={{
-          color: "#fff",
           backgroundColor: "#1e202a",
           width: "55%",
           margin: "20px auto 0",
           border: "1px solid transparent",
+          color: "primary.contrastText",
           ":hover": {
-            color: "#1e202a",
-            backgroundColor: "#fff",
+            color: "primary.main",
+            backgroundColor: "primary.contrastText",
             border: "1px solid #1e202a",
           },
         }}
