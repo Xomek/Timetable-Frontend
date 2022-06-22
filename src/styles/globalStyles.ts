@@ -49,7 +49,7 @@ export const globalStyles: any = {
     padding: 0,
   },
 
-  ["@media (maxWidth: 400)"]: {
+  ["@media (max-width: 400px)"]: {
     ".slider-day:": {
       ".slick-track:": {
         padding: 0,
