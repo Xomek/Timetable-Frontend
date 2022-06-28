@@ -45,7 +45,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ pl: 3 }}>
+        <Box sx={{ pl: 3, width: 300 }}>
           <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
@@ -109,12 +109,22 @@ const Settings: FC = () => {
           sx={{
             borderRight: 1,
             borderColor: "divider",
-            width: 300,
+            width: "100%",
           }}
         >
           {roleTitles.includes("student") && [
-            <Tab key={"password"} label="Пароль" {...a11yProps(0)} />,
-            <Tab key={"group"} label="Группа" {...a11yProps(1)} />,
+            <Tab
+              key={"password"}
+              label="Пароль"
+              {...a11yProps(0)}
+              sx={{ width: "100%" }}
+            />,
+            <Tab
+              key={"group"}
+              label="Группа"
+              {...a11yProps(1)}
+              sx={{ width: "100%" }}
+            />,
           ]}
           {roleTitles.includes("headman") && [
             <Tab
@@ -130,7 +140,7 @@ const Settings: FC = () => {
             <TabPanel value={value} index={0}>
               <Box component="form" onSubmit={formikForPassword.handleSubmit}>
                 <TextField
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, width: "100%" }}
                   type="password"
                   placeholder="Пароль"
                   name="oldPassword"
@@ -145,7 +155,7 @@ const Settings: FC = () => {
                   value={formikForPassword.values.newPassword}
                   onChange={formikForPassword.handleChange}
                   onBlur={formikForPassword.handleBlur}
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, width: "100%" }}
                 />
                 <Button type="submit" sx={{ width: "100%" }}>
                   Подтвердить
@@ -155,7 +165,7 @@ const Settings: FC = () => {
             <TabPanel value={value} index={1}>
               <Box component="form" onSubmit={formikForGroup.handleSubmit}>
                 <AppSelect
-                  sx={{ width: "100%" }}
+                  sx={{ mb: 2, width: "100%" }}
                   name="id"
                   label="Выберите группу"
                   options={groupList}
