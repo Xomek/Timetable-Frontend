@@ -1,5 +1,5 @@
 import * as yup from "yup";
 
-export const changeGroupShema = yup.object({
+export const changeGroupSchema = yup.object({
   id: yup.string().required("Обязательное поле"),
 });
