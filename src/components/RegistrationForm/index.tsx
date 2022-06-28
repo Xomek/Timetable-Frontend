@@ -1,4 +1,4 @@
-import { Button, Typography, TextField, Theme, styled } from "@mui/material";
+import { Button, Typography, TextField, Theme, styled, Box } from "@mui/material";
 import { useFormik } from "formik";
 import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -25,8 +25,9 @@ const RegistrationFormStyled = styled("form")(
 );
 
 const RegistrationForm: FC = () => {
-  const dispatch = useAppDispatch();
+  const error = useAppSelector((state) => state.auth.error);
   const { groupList } = useAppSelector((state) => state.groups);
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -43,6 +44,14 @@ const RegistrationForm: FC = () => {
 
   return (
     <RegistrationFormStyled onSubmit={formik.handleSubmit}>
+      <Box
+        sx={{
+          color: "red",
+          textAlign: "center",
+        }}
+      >
+        {error}
+      </Box>
       <Typography
         sx={{
           fontSize: "30px",

@@ -1,8 +1,15 @@
-import { Button, Typography, TextField, Theme, styled } from "@mui/material";
+import {
+  Button,
+  Typography,
+  TextField,
+  Theme,
+  styled,
+  Box,
+} from "@mui/material";
 import { FC } from "react";
 import { useFormik } from "formik";
 import { loginFormSchema } from "../../yup/auth/loginForm.schema";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { loginUser } from "../../store/thunks/authThunks";
 
 const LoginFormStyled = styled("form")(({ theme }: { theme: Theme }) => ({
@@ -23,6 +30,7 @@ const LoginFormStyled = styled("form")(({ theme }: { theme: Theme }) => ({
 }));
 
 const LoginForm: FC = () => {
+  const error = useAppSelector((state) => state.auth.error);
   const dispatch = useAppDispatch();
 
   const formik = useFormik({
@@ -38,6 +46,14 @@ const LoginForm: FC = () => {
 
   return (
     <LoginFormStyled onSubmit={formik.handleSubmit}>
+      <Box
+        sx={{
+          color: "red",
+          textAlign: "center",
+        }}
+      >
+        {error}
+      </Box>
       <Typography
         sx={{
           fontSize: "30px",
