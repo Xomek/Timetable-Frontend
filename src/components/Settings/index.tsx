@@ -13,6 +13,8 @@ import { FC, SyntheticEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { changeGroup, changePassword } from "../../store/thunks/settingsThunks";
 import AppSelect from "../AppSelect";
+import ChangeGroupForm from "./ChangeGroupForm";
+import ChangePasswordForm from "./ChangePasswordForm";
 
 const SettingsStyled = styled(Box)(({ theme }: { theme: Theme }) => ({
   backgroundColor: "#fff",
@@ -61,26 +63,10 @@ function a11yProps(index: number) {
 }
 
 const Settings: FC = () => {
-  const groupList = useAppSelector((state) => state.groups.groupList);
-
   const { userRoles } = useAppSelector((state) => state.auth.user);
   const [value, setValue] = useState(0);
-  const dispatch = useAppDispatch();
 
   const roleTitles = userRoles.map((role) => role.title);
-
-  const formikForPassword = useFormik({
-    initialValues: { oldPassword: "", newPassword: "" },
-    onSubmit: (values) => {
-      dispatch(changePassword(values));
-    },
-  });
-  const formikForGroup = useFormik({
-    initialValues: { id: "" },
-    onSubmit: (values) => {
-      dispatch(changeGroup(values));
-    },
-  });
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -138,45 +124,10 @@ const Settings: FC = () => {
         {roleTitles.includes("student") && (
           <>
             <TabPanel value={value} index={0}>
-              <Box component="form" onSubmit={formikForPassword.handleSubmit}>
-                <TextField
-                  sx={{ mb: 2, width: "100%" }}
-                  type="password"
-                  placeholder="Пароль"
-                  name="oldPassword"
-                  value={formikForPassword.values.oldPassword}
-                  onChange={formikForPassword.handleChange}
-                  onBlur={formikForPassword.handleBlur}
-                />
-                <TextField
-                  type="password"
-                  placeholder="Новый пароль"
-                  name="newPassword"
-                  value={formikForPassword.values.newPassword}
-                  onChange={formikForPassword.handleChange}
-                  onBlur={formikForPassword.handleBlur}
-                  sx={{ mb: 2, width: "100%" }}
-                />
-                <Button type="submit" sx={{ width: "100%" }}>
-                  Подтвердить
-                </Button>
-              </Box>
+              <ChangePasswordForm />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <Box component="form" onSubmit={formikForGroup.handleSubmit}>
-                <AppSelect
-                  sx={{ mb: 2, width: "100%" }}
-                  name="id"
-                  label="Выберите группу"
-                  options={groupList}
-                  value={formikForGroup.values.id}
-                  onChange={formikForGroup.handleChange}
-                  onBlur={formikForGroup.handleBlur}
-                />
-                <Button type="submit" sx={{ width: "100%" }}>
-                  Подтвердить
-                </Button>
-              </Box>
+              <ChangeGroupForm />
             </TabPanel>
           </>
         )}
