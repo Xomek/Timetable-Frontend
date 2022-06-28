@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { registrationUser } from "../../store/thunks/authThunks";
-import { registrationFormSchema } from "../../yup/registrationForm.shema";
+import { registrationFormSchema } from "../../yup/auth/registrationForm.schema";
 import AppSelect from "../AppSelect";
 
 const RegistrationFormStyled = styled("form")(

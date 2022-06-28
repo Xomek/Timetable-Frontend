@@ -1,7 +1,7 @@
 import { Button, Typography, TextField, Theme, styled } from "@mui/material";
 import { FC } from "react";
 import { useFormik } from "formik";
-import { loginFormSchema } from "../../yup/loginForm.shema";
+import { loginFormSchema } from "../../yup/auth/loginForm.schema";
 import { useAppDispatch } from "../../store/hooks";
 import { loginUser } from "../../store/thunks/authThunks";
 
